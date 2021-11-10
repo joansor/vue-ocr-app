@@ -1,7 +1,33 @@
 <script>
 export default {
 	name: "MenuItem",
-	props: ["addToShoppingCart", "image", "inStock", "name", "price", "quantity"],
+		props: {
+		addToShoppingCart: {
+			type: Function,
+			required: true
+		},
+		image: {
+			type: Object,
+			required: true
+		},
+		inStock: {
+			type: Boolean,
+			required: true
+		},
+		name: {
+			type: String,
+			required: true
+		},
+		price: {
+			type: Number,
+			required: true
+		},
+		quantity: {
+			type: Number,
+			defaut: 1
+		}
+	},
+	// ["addToShoppingCart", "image", "inStock", "name", "price", "quantity"],
 	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 	data() {
 		return {
@@ -47,4 +73,16 @@ export default {
 	</div>
 </template>
 
-<style></style>
+<style lang="scss">
+
+.menu-item {
+	display: flex;
+	width: 500px;
+	justify-content: space-between;
+	margin-bottom: 30px;
+	&__image {
+		max-width: 300px;
+	}
+}
+
+</style>
