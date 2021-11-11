@@ -53,7 +53,7 @@ export default createStore({
   //     context.commit('INCREMENT_CART', amount)
   // }
   //Destructuration 
-    incrementCart({commit}, amount) {
+    incrementCart({commit}, amount): void {
       commit('INCREMENT_CART', amount)
   }
 
