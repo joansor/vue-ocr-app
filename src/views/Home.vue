@@ -12,7 +12,7 @@
       <h2>Menu</h2>
       <MenuItem
         v-for="item in simpleMenu"
-        :addToShoppingCart="addToShoppingCart"
+        @add-items-to-cart="addToShoppingCart"
         :name="item.name"
         :image="item.image"
         :price="item.price"
@@ -56,6 +56,7 @@
 </style>
 <script>
 import MenuItem from "../components/MenuItem";
+import { mapGetters, mapState, mapActions } from 'vuex'
 export default {
   name: "Home",
   components: {
@@ -64,54 +65,66 @@ export default {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   data() {
     return {
-      restaurantName: "La belle Vue",
-      shoppingCart: 0,
-      simpleMenu: [
-        {
-          name: "Croissant",
-          image: {
-            source: "/images/croissant.jpg",
-            alt: "Un croissant",
-          },
-          inStock: true,
-          quantity: 1,
-          price: 2.99,
-        },
-        {
-          name: "Baguette de pain",
-          image: {
-            source: "/images/french-baguette.jpeg",
-            alt: "Quatre baguettes de pain",
-          },
-          inStock: true,
-          quantity: 1,
-          price: 3.99,
-        },
-        {
-          name: "Éclair",
-          image: {
-            source: "/images/eclair.jpg",
-            alt: "Éclair au chocolat",
-          },
-          inStock: false,
-          quantity: 1,
-          price: 4.99,
-        },
-      ],
-    };
+    //   restaurantName: "La belle Vue",
+    //   shoppingCart: 0,
+    //   simpleMenu: [
+    //     {
+    //       name: "Croissant",
+    //       image: {
+    //         source: "/images/croissant.jpg",
+    //         alt: "Un croissant",
+    //       },
+    //       inStock: true,
+    //       quantity: 1,
+    //       price: 2.99,
+    //     },
+    //     {
+    //       name: "Baguette de pain",
+    //       image: {
+    //         source: "/images/french-baguette.jpeg",
+    //         alt: "Quatre baguettes de pain",
+    //       },
+    //       inStock: true,
+    //       quantity: 1,
+    //       price: 3.99,
+    //     },
+    //     {
+    //       name: "Éclair",
+    //       image: {
+    //         source: "/images/eclair.jpg",
+    //         alt: "Éclair au chocolat",
+    //       },
+    //       inStock: false,
+    //       quantity: 1,
+    //       price: 4.99,
+    //     },
+    //   ],
+     };
   },
   computed: {
+    ...mapState({
+          restaurantName: 'restaurantName',
+          shoppingCart: 'shoppingCart',
+          simpleMenu: 'simpleMenu'
+    }),
+    ...mapGetters({
+      copyright: 'copyright'
+    })
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    copyright() {
-      const currentYear = new Date().getFullYear();
-      return `Copyright ${this.restaurantName} ${currentYear}`;
-    },
+    // copyright() {
+    //   const currentYear = new Date().getFullYear();
+    //   return `Copyright ${this.restaurantName} ${currentYear}`;
+    // },
   },
   methods: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    addToShoppingCart(amount) {
-      this.shoppingCart += amount;
-    },
+    //  addToShoppingCart(amount) {
+    // //   this.shoppingCart += amount;
+    //     this.$store.commit('INCREMENT_CART',amount)
+    //  }
+    ...mapActions({
+          addToShoppingCart: 'incrementCart'
+    })
   },
 };
 </script>
